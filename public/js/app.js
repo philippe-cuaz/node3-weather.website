@@ -1,4 +1,4 @@
-console.log('Client side javascript file is loaded')
+//console.log('Client side javascript file is loaded')
 //const url1="https://maps.googleapis.com/maps/api/geocode/json?24%20Sussex%20Drive%20Ottawa%20ON"
 //console.log(url1);
 
