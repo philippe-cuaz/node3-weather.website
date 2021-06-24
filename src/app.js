@@ -6,7 +6,7 @@ const forecast = require('./util/forecast')
 const {Client} = require("@googlemaps/google-maps-services-js");
 
 const app = express()
-const port = process.emv.PORT || 3000
+const port = process.env.PORT || 3000
 
 const publicDirectoryPath=path.join(__dirname,'../public')
 const viewsPath=path.join(__dirname,'../templates/views')
