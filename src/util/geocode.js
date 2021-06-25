@@ -8,8 +8,8 @@ const geocode = (address, callback) => {
   //  const url2="https://maps.googleapis.com/maps/api/geocode/json?address=24%20Sussex%20Drive%20Ottawa%20ON&key=AIzaSyCnUx1sH7KScEXqyaF5eg2oigAic7LmDl4"
 //    const apikey="AIzaSyCnUx1sH7KScEXqyaF5eg2oigAic7LmDl4"
 
-    request({ url, json: true }, (error,  body ) => {
-  //    console.log('body: '+body)
+    request({ url, json: true }, (error,  {body} ) => {
+      console.log('body1: '+{body})
         if (error) {
             callback('Unable to connect to location services!', undefined)
         } else if (body.features.length === 0) {

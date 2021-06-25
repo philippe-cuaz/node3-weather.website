@@ -3,7 +3,7 @@ const express = require('express')
 const hbs=require('hbs')
 const geocode = require('./util/geocode')
 const forecast = require('./util/forecast')
-const {Client} = require("@googlemaps/google-maps-services-js");
+//const {Client} = require("@googlemaps/google-maps-services-js");
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -12,12 +12,12 @@ const publicDirectoryPath=path.join(__dirname,'../public')
 const viewsPath=path.join(__dirname,'../templates/views')
 const partialsPath=path.join(__dirname,'../templates/partials')
 
-const client = new Client({});
+//const client = new Client({});
 
 
 
-const url1="https://maps.googleapis.com/maps/api/geocode/json?24%20Sussex%20Drive%20Ottawa%20ON"
-console.log(url1);
+//const url1="https://maps.googleapis.com/maps/api/geocode/json?24%20Sussex%20Drive%20Ottawa%20ON"
+//console.log(url1);
 
 app.set('view engine','hbs')
 app.set('views',viewsPath)
@@ -61,31 +61,31 @@ app.get('/weather',(req,res)=>{
       error:'You must provide coordinates longitude & latitude & location & address terms'
     })
   }
-    console.log('latitude: '+latitude+' longitude: '+longitude+' location: '+location+' address: '+address)
+  //  console.log('latitude: '+latitude+' longitude: '+longitude+' location: '+location+' address: '+address)
 
   //geocode()
-     geocode(location, (error,  latitude, longitude, location ) => {
+  //   geocode(address, (error,  address ) => {
   //  })
 
-  //  geocode(address, (error,  {latitude, longitude, location }) => {
+    geocode(address, (error,  {latitude, longitude, location }) => {
         if (error) {
              console.log(error)
              return res.send({error})
         }
-
-        forecast(latitude, longitude, (error, forecastData) => {
+const body=null;
+        forecast(latitude, longitude, (error, {body}) => {
             if (error) {
-                console.log(error)
+                console.log("error: "+error)
                 return res.send({error})
             }
 
-            console.log(location)
-            console.log(forecastData)
+            console.log("location: "+location)
+            console.log("body2: "+body)
         })
     })
 
     res.send({
-      forecast:forecastData,
+      forecast:body.weather[0].main,
      location,
      address: req.query.address
 
@@ -102,7 +102,7 @@ if(!req.query.search){
   })
 }
 
-  console.log(req.query.search)
+  console.log("search: "+req.query.search)
   res.send({
     products: []
   })
